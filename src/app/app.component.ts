@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent, HeaderComponent } from './core';
-import { ContentComponent } from './features';
+import { ContentComponent, FooterComponent, HeaderComponent } from './common';
 
 @Component({
   selector: 'rmt-root',

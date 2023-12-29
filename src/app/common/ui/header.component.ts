@@ -30,7 +30,6 @@ import { RouterLink } from '@angular/router';
       </h1>
       <nav>
         <a routerLink="/user">user</a>
-        <a routerLink="/stats">stats</a>
         <a routerLink="/repos">repositories</a>
         <a routerLink="/gists">gists</a>
       </nav>
