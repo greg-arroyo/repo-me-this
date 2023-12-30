@@ -1,21 +1,28 @@
 import { inject, Injectable } from '@angular/core';
 import { GITHUB_PROVIDER } from '../tokens/github/github.token';
+import { User } from './types';
 
 @Injectable({ providedIn: 'root' })
 export class GitHubService {
   private readonly githubProvider = inject(GITHUB_PROVIDER);
 
-  async getUser(username: string) {
-    // TODO: add user, repos, gists types to ./types.ts
-    // TODO: add logic for mapping provider response to return common platform types
-    return await this.githubProvider.getUser(username);
-  }
-
-  async getRepos(username: string) {
-    // TODO: Implement.
-  }
-
-  async getGists(username: string) {
-    // TODO: Implement.
+  async getUser(username: string): Promise<User> {
+    return await this.githubProvider.getUser(username).then((response) => {
+      const data = JSON.parse(response);
+      return {
+        ...data,
+        username: data['login'],
+        url: data['html_url'],
+        avatarUrl: data['avatar_url'],
+        publicReposCount: data['public_repos'],
+        publicGistsCount: data['public_gists'],
+        followersUrl: data['followers_url'],
+        followerCount: data['followers'],
+        followingUrl: data['following_url'],
+        followingCount: data['following'],
+        dateCreated: data['created_at'],
+        dateLastModified: data['updated_at'],
+      };
+    });
   }
 }

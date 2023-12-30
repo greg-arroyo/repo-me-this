@@ -13,15 +13,9 @@ export const GITHUB_PROVIDER = new InjectionToken<GitHubProvider>(
     providedIn: 'root',
     factory: () => {
       return {
-        getUser: async (username) => {
-          return await getUserByUsername(username);
-        },
-        getRepos: async (username) => {
-          return await getReposForUsername(username);
-        },
-        getGists: async (username) => {
-          return await getGistsForUsername(username);
-        },
+        getUser: async (username) => await getUserByUsername(username),
+        getRepos: async (username) => await getReposForUsername(username),
+        getGists: async (username) => await getGistsForUsername(username),
       } as GitHubProvider;
     },
   }
@@ -31,19 +25,19 @@ const getUserByUsername = async (username: string) => {
   const response = await fetch(`${apiBaseUrl}/users/${username}`, {
     method: 'GET',
   });
-  return response.json();
+  return await response.json();
 };
 
 const getReposForUsername = async (username: string) => {
   const response = await fetch(`${apiBaseUrl}/users/${username}/repos`, {
     method: 'GET',
   });
-  return response.json();
+  return await response.json();
 };
 
 const getGistsForUsername = async (username: string) => {
   const response = await fetch(`${apiBaseUrl}/users/${username}/gists`, {
     method: 'GET',
   });
-  return response.json();
+  return await response.json();
 };
