@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { GITHUB_PROVIDER } from '../tokens/github/github.token';
-import { User } from './types';
+import { User } from '../types/user';
 
 @Injectable({ providedIn: 'root' })
 export class GitHubService {
